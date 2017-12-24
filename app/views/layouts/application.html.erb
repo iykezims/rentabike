@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Golfstore</title>
+  
+  <title>RentaBikeDublin</title>
+  <!--<img src="shamrock.jpg">-->
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+  
+  <div  id="mainTitle">
+  <br>
+  <h1  align="center"><font face="verdana" size="6" color="lightblue"><b>RENT A BIKE IN DUBLIN</b></h1><br><h6  align="center"><i><br>project of NCI 2017</i></h6></font>
+  </div>
+  <br><br><br>
   <div id="header">
     
   </div>
@@ -18,25 +26,43 @@
         <li><a href="/contact">Contact Us</a></li>
         <li><a href="/admin">Login</a></li>
         <li><a href="/logout">Logout</a></li>
-      </ul>
+        </ul>
     </div>
   </div>
   <div id="container">
     <div id="content">
       <p class="notice"><%= flash[:notice] %></p>
+      <p class="alert"><%= flash[:alert] %></p>
+      
       <%= yield %>
+      <% if user_signed_in? %>
+        <div>Signed <%= current_user.email %> (<%= link_to "Sign Out", destroy_user_session_path, :method => :delete %>)</div>
+      <% else %>
+        <%= link_to 'Register', new_user_registration_path %> or <% link_to 'Sign in', new_user_session_path %>
+      <% end %>
+
     </div>
     <div id="first-column">
         <div class="loginbox">
-          <h2 class="Boxheaders">Login here...</h2>
+          <h2 class="Boxheaders"><a href="/profiles/new">New Account</a></h2>
         </div>
         <div class="searchbox">
-          <h2 class="BoxHeaders">Search Catalog</h2>
+          <h2 class="BoxHeaders"><a href="/logout">Logout</a></h2>
         </div>
-    </div>
+                <div class="searchbox">
+          <h2 class="BoxHeaders"><a href="/cart">My Shopping Cart</a></h2>
+        </div>
+                <div class="searchbox">
+          <h2 class="BoxHeaders"><a href="/items">Search Catalog</a></h2>
+        </div>
+        
+         <div class="searchbox">
+          <h2 class="BoxHeaders"><a href="/profiles">Search Profile </a></h2>
+        </div>
+        </div>
   </div>
   <div id="footer">
-    <h6 class="footertext">&copy; Online Golfstore&trade; 2017</h6>
+    <h6 class="footertext">2017&copy; RENT A BIKE IN DUBLIN &trade; Ikechukwu Ibezim NCI x16146302</h6>
   </div>
 
 </body>

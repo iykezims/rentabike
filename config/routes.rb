@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :profiles
+
+  devise_for :users
   get '/about' => 'site#about'
   get '/contact' => 'site#contact'
   get '/admin' => 'user#admin_login'
@@ -6,6 +9,9 @@ Rails.application.routes.draw do
   get '/cart' => 'cart#index' 
   get '/cart/:id' => 'cart#add'
   get '/cart/clear' => 'cart#clearCart' 
+  get '/signedinuserprofile' => 'profiles#signedinuserprofile'
+  
+  #get '/views/prfiles/new' => 'new'  #**********************************   MODIFIED
 
   resources :items
 
@@ -14,7 +20,7 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'items#index'
-
+  
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

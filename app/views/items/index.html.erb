@@ -18,14 +18,15 @@
         <%= item.description %>
       </div>
       <div class="price">
-        <%= number_to_currency(item.price, :unit => "&pound;") %>
+        <%= number_to_currency(item.price, :unit => "& Euro;") %>
       </div>
       <div class="links">
-        <% if session[:login] == 1 %>
+        <!--% if session[:login] == 1 %-->
+        <% if current_user.admin? %>
           <%= link_to 'Edit', edit_item_path(item) %>
           <%= link_to 'Destroy', item, :confirm => 'Are you sure?', :method => :delete %>
         <% else %>
-          <a href="/cart/<%= item.id %>">Add to Cart</a><br /><br />
+            <a href="/cart/<%= item.id %>">Add to Cart</a><br /><br />
         <% end %>
       </div>
     </td>
@@ -34,6 +35,7 @@
 
 </table>
 
-<% if session[:login] == 1 %>
+<!--% if session[:login] == 1 %-->
+<% if current_user.admin? %>
   <p><%= link_to 'New Item', new_item_path %></p>
 <% end %>
